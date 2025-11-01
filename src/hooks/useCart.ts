@@ -32,21 +32,26 @@ export const useCart = () => {
       return groups;
     }, [] as (AddOn & { quantity: number })[]);
     
+    // Create a unique identifier for this exact configuration
+    const uniqueId = `${item.id}-${variation?.id || 'none'}-${groupedAddOns?.map(a => `${a.id}:${a.quantity}`).sort().join('_') || 'none'}`;
+    
     setCartItems(prev => {
-      const existingItem = prev.find(cartItem => 
-        cartItem.id === item.id && 
-        cartItem.selectedVariation?.id === variation?.id &&
-        JSON.stringify(cartItem.selectedAddOns?.map(a => `${a.id}-${a.quantity || 1}`).sort()) === JSON.stringify(groupedAddOns?.map(a => `${a.id}-${a.quantity}`).sort())
-      );
+      // Check if exact same item configuration already exists
+      const existingItem = prev.find(cartItem => {
+        const cartUniqueId = `${item.id}-${cartItem.selectedVariation?.id || 'none'}-${cartItem.selectedAddOns?.map(a => `${a.id}:${a.quantity}`).sort().join('_') || 'none'}`;
+        return cartUniqueId === uniqueId;
+      });
       
       if (existingItem) {
-        return prev.map(cartItem =>
-          cartItem === existingItem
+        // If exact match found, increase quantity instead of adding new entry
+        return prev.map(cartItem => {
+          const cartUniqueId = `${item.id}-${cartItem.selectedVariation?.id || 'none'}-${cartItem.selectedAddOns?.map(a => `${a.id}:${a.quantity}`).sort().join('_') || 'none'}`;
+          return cartUniqueId === uniqueId
             ? { ...cartItem, quantity: cartItem.quantity + quantity }
-            : cartItem
-        );
+            : cartItem;
+        });
       } else {
-        const uniqueId = `${item.id}-${variation?.id || 'default'}-${addOns?.map(a => a.id).join(',') || 'none'}`;
+        // Add new cart item with unique ID
         return [...prev, { 
           ...item,
           id: uniqueId,

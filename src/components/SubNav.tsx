@@ -10,23 +10,23 @@ const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) =>
   const { categories, loading } = useCategories();
 
   return (
-    <div className="sticky top-16 z-40 bg-white/90 backdrop-blur-md border-b border-ramen-sesame">
+    <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-md border-b-2 border-inasal-green/20 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-4 overflow-x-auto py-3 scrollbar-hide">
+        <div className="flex items-center space-x-3 overflow-x-auto py-4 scrollbar-hide">
           {loading ? (
-            <div className="flex space-x-4">
+            <div className="flex space-x-3">
               {[1,2,3,4,5].map(i => (
-                <div key={i} className="h-8 w-20 bg-gray-200 rounded animate-pulse" />
+                <div key={i} className="h-10 w-24 bg-gray-200 rounded-lg animate-pulse" />
               ))}
             </div>
           ) : (
             <>
               <button
                 onClick={() => onCategoryClick('all')}
-                className={`px-3 py-1.5 rounded-full text-sm transition-colors duration-200 border ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap ${
                   selectedCategory === 'all'
-                    ? 'bg-ramen-red text-white border-ramen-red'
-                    : 'bg-white text-gray-700 border-gray-300 hover:border-ramen-red'
+                    ? 'bg-inasal-green text-white shadow-inasal'
+                    : 'bg-white text-inasal-green border-2 border-inasal-green/30 hover:border-inasal-green hover:shadow-sm'
                 }`}
               >
                 All
@@ -35,13 +35,13 @@ const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) =>
                 <button
                   key={c.id}
                   onClick={() => onCategoryClick(c.id)}
-                  className={`px-3 py-1.5 rounded-full text-sm transition-colors duration-200 border flex items-center space-x-1 ${
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center ${c.icon ? 'space-x-2' : ''} whitespace-nowrap ${
                     selectedCategory === c.id
-                      ? 'bg-ramen-red text-white border-ramen-red'
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-ramen-red'
+                      ? 'bg-inasal-green text-white shadow-inasal'
+                      : 'bg-white text-inasal-green border-2 border-inasal-green/30 hover:border-inasal-green hover:shadow-sm'
                   }`}
                 >
-                  <span>{c.icon}</span>
+                  {c.icon && <span className="text-lg">{c.icon}</span>}
                   <span>{c.name}</span>
                 </button>
               ))}

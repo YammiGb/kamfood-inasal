@@ -2,14 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ramen Yard Custom Styles */
-/* Minimal helpers for ramen palette when needed outside tailwind tokens */
-.bg-ramen-cream { background-color: #FFF3E0; }
-.bg-ramen-beige { background-color: #F7E7CE; }
-.text-ramen-red { color: #D7263D; }
-.text-ramen-dark { color: #0B0A0A; }
-.border-ramen-sesame { border-color: #D1C7B7; }
-.ring-ramen-gold { --tw-ring-color: #E0A106; }
+/* Kamfood Inasal Custom Styles */
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+  }
+}
+
+@layer components {
+  /* Inasal brand button styles */
+  .btn-inasal-primary {
+    @apply bg-inasal-green hover:bg-inasal-green-light text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-inasal hover:shadow-inasal-lg;
+  }
+  
+  .btn-inasal-secondary {
+    @apply bg-inasal-orange hover:bg-inasal-yellow text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  /* Inasal card styles */
+  .card-inasal {
+    @apply bg-white rounded-xl shadow-inasal hover:shadow-inasal-lg transition-all duration-300 border border-inasal-cream-dark;
+  }
+  
+  /* Filipino/tropical pattern background */
+  .bg-tropical-pattern {
+    background-image: 
+      linear-gradient(30deg, #23470B 12%, transparent 12.5%, transparent 87%, #23470B 87.5%, #23470B),
+      linear-gradient(150deg, #23470B 12%, transparent 12.5%, transparent 87%, #23470B 87.5%, #23470B),
+      linear-gradient(30deg, #23470B 12%, transparent 12.5%, transparent 87%, #23470B 87.5%, #23470B),
+      linear-gradient(150deg, #23470B 12%, transparent 12.5%, transparent 87%, #23470B 87.5%, #23470B);
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+    opacity: 0.03;
+  }
+}
 
 /* Hide scrollbar for mobile nav */
 .scrollbar-hide {
@@ -27,12 +53,18 @@ img {
   image-rendering: crisp-edges;
 }
 
-/* Preload critical images */
-.preload-image {
-  content: '';
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  width: 1px;
-  height: 1px;
+/* Smooth animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(to right, transparent 0%, rgba(35, 71, 11, 0.1) 50%, transparent 100%);
+  background-size: 1000px 100%;
 }

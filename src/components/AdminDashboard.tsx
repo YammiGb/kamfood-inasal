@@ -232,7 +232,7 @@ const AdminDashboard: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'ClickEats@Admin!2025') {
+    if (password === 'KamfoodInasal@Admin!2025') {
       setIsAuthenticated(true);
       localStorage.setItem('beracah_admin_auth', 'true');
       setLoginError('');
@@ -932,20 +932,20 @@ const AdminDashboard: React.FC = () => {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <Coffee className="h-8 w-8 text-black" />
-              <h1 className="text-2xl font-noto font-semibold text-black">ClickEats Admin</h1>
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <Coffee className="h-6 w-6 sm:h-8 sm:w-8 text-black" />
+              <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-noto font-semibold text-black">Kamfood Inasal Admin</h1>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <a
                 href="/"
-                className="text-gray-600 hover:text-black transition-colors duration-200"
+                className="text-xs sm:text-sm text-gray-600 hover:text-black transition-colors duration-200"
               >
                 View Website
               </a>
               <button
                 onClick={handleLogout}
-                className="text-gray-600 hover:text-black transition-colors duration-200"
+                className="text-xs sm:text-sm text-gray-600 hover:text-black transition-colors duration-200"
               >
                 Logout
               </button>

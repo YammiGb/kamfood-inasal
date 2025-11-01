@@ -30,17 +30,19 @@ function MainApp() {
     : menuItems.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-cream-50 font-inter">
-      <Header 
-        cartItemsCount={cart.getTotalItems()}
-        onCartClick={() => handleViewChange('cart')}
-        onMenuClick={() => handleViewChange('menu')}
-      />
-      <SubNav selectedCategory={selectedCategory} onCategoryClick={handleCategoryClick} />
+    <div className="min-h-screen bg-white font-inter relative">
+      <div className="relative z-10">
+        <Header 
+          cartItemsCount={cart.getTotalItems()}
+          onCartClick={() => handleViewChange('cart')}
+          onMenuClick={() => handleViewChange('menu')}
+        />
+        <SubNav selectedCategory={selectedCategory} onCategoryClick={handleCategoryClick} />
       
       {currentView === 'menu' && (
         <Menu 
           menuItems={filteredMenuItems}
+          selectedCategory={selectedCategory}
           addToCart={cart.addToCart}
           cartItems={cart.cartItems}
           updateQuantity={cart.updateQuantity}
@@ -67,12 +69,13 @@ function MainApp() {
         />
       )}
       
-      {currentView === 'menu' && (
-        <FloatingCartButton 
-          itemCount={cart.getTotalItems()}
-          onCartClick={() => handleViewChange('cart')}
-        />
-      )}
+        {currentView === 'menu' && (
+          <FloatingCartButton 
+            itemCount={cart.getTotalItems()}
+            onCartClick={() => handleViewChange('cart')}
+          />
+        )}
+      </div>
     </div>
   );
 }

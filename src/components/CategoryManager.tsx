@@ -13,7 +13,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onBack }) => {
   const [formData, setFormData] = useState({
     id: '',
     name: '',
-    icon: '☕',
+    icon: '',
     sort_order: 0,
     active: true
   });
@@ -23,7 +23,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onBack }) => {
     setFormData({
       id: '',
       name: '',
-      icon: '☕',
+      icon: '',
       sort_order: nextSortOrder,
       active: true
     });
@@ -53,7 +53,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onBack }) => {
   };
 
   const handleSaveCategory = async () => {
-    if (!formData.id || !formData.name || !formData.icon) {
+    if (!formData.id || !formData.name) {
       alert('Please fill in all required fields');
       return;
     }
@@ -172,25 +172,6 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onBack }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-black mb-2">Icon *</label>
-                <div className="flex items-center space-x-3">
-                  <input
-                    type="text"
-                    value={formData.icon}
-                    onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="Enter emoji or icon"
-                  />
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-2xl">
-                    {formData.icon}
-                  </div>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Use an emoji or icon character (e.g., ☕, 🧊, 🫖, 🥐)
-                </p>
-              </div>
-
-              <div>
                 <label className="block text-sm font-medium text-black mb-2">Sort Order</label>
                 <input
                   type="number"
@@ -276,7 +257,7 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onBack }) => {
                         <GripVertical className="h-4 w-4" />
                         <span className="text-sm text-gray-500">#{category.sort_order}</span>
                       </div>
-                      <div className="text-2xl">{category.icon}</div>
+                      {category.icon && <div className="text-2xl">{category.icon}</div>}
                       <div>
                         <h3 className="font-medium text-black">{category.name}</h3>
                         <p className="text-sm text-gray-500">ID: {category.id}</p>
